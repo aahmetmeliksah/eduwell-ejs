@@ -1,5 +1,6 @@
 const Course = require("../models/Course");
 
+// add a course
 const addCourse = async (req, res) => {
   try {
     const course = await Course.create(req.body);
@@ -16,4 +17,20 @@ const addCourse = async (req, res) => {
   }
 };
 
-module.exports = { addCourse };
+// get all courses
+const getAllCourses = async (req, res) => {
+  try {
+    const courses = await Course.find();
+
+    res.status(200).render("courses", {
+      courses,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+module.exports = { addCourse, getAllCourses };

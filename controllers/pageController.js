@@ -6,4 +6,8 @@ const aboutPage = async (req, res) => {
   res.status(200).render("about");
 };
 
-module.exports = { indexPage, aboutPage };
+const ourServicesPage = async (req, res) => {
+  res.status(200).render("our-services");
+};
+
+module.exports = { indexPage, aboutPage, ourServicesPage };
