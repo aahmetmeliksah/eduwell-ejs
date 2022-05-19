@@ -7,13 +7,19 @@
         <div class="col-lg-12">
           <div class="header-text">
             <h1>Courses</h1>
+            <!-- List categories style later -->
+            <ul class="d-flex">
+              <% for (let i = 0; i < categories.length; i++) { %>
+              <li style="margin-right: 2rem;"> <a href="/courses?categories=<%= categories[i].slug%>"> <%= categories[i].name %> </a>  </li>
+              <% } %>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </section>
-        
-          
+  </section>                     
+  
+
           <div class="container">
             <div class="row mb-5 mt-5"> 
             <% for(let i = 0; i < courses.length; i++) { %>

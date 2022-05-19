@@ -1,4 +1,5 @@
 const Course = require("../models/Course");
+const Category = require("../models/Category");
 
 // add a course
 const addCourse = async (req, res) => {
@@ -20,10 +21,20 @@ const addCourse = async (req, res) => {
 // get all courses
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find();
+    const category = await Category.findOne({ slug: req.query.categories });
+
+    let filter = {};
+
+    if (category) {
+      filter = { category: category._id };
+    }
+
+    const courses = await Course.find(filter);
+    const categories = await Category.find();
 
     res.status(200).render("courses", {
       courses,
+      categories,
     });
   } catch (error) {
     res.status(400).json({
