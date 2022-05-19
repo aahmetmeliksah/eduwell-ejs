@@ -7,6 +7,7 @@ const app = express();
 // import routes
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
+const categoryRoute = require("./routes/categoryRoute");
 
 // set view engine
 app.set("view engine", "ejs");
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 // routes
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
+app.use("/categories", categoryRoute);
 
 // listen to server
 const PORT = 8888;
