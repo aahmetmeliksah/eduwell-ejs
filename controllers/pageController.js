@@ -10,4 +10,18 @@ const ourServicesPage = async (req, res) => {
   res.status(200).render("our-services");
 };
 
-module.exports = { indexPage, aboutPage, ourServicesPage };
+const loginPage = async (req, res) => {
+  res.status(200).render("login");
+};
+
+const registerPage = async (req, res) => {
+  res.status(200).render("register");
+};
+
+module.exports = {
+  indexPage,
+  aboutPage,
+  ourServicesPage,
+  loginPage,
+  registerPage,
+};
