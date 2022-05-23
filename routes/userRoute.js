@@ -9,9 +9,12 @@ const {
   myLearningPage,
 } = require("../controllers/authController");
 
+// middlewares
+const authMiddleware = require("../middlewares/authMiddleWare");
+
 router.route("/register").post(createUser);
 router.route("/login").post(loginUser);
 router.route("/logout").get(logoutUser);
-router.route("/my-learning").get(myLearningPage);
+router.route("/my-learning").get(authMiddleware, myLearningPage);
 
 module.exports = router;
