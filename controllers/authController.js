@@ -52,4 +52,19 @@ const logoutUser = async (req, res) => {
   });
 };
 
-module.exports = { createUser, loginUser, logoutUser };
+const myLearningPage = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.session.userID });
+
+    res.status(200).render("my-learning", {
+      user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+module.exports = { createUser, loginUser, logoutUser, myLearningPage };
