@@ -8,6 +8,19 @@
   </head>
   <body style="font-family: sans-serif">
     <h1><%= user.name %></h1>
+
+    <% if(user.role === "teacher") { %>
+    <div style="background-color: navy; color: wheat">
+      <h4>TEACHER</h4>
+    </div>
+    <% } %>
+    <!--  -->
+    <% if(user.role === "student") { %>
+    <div style="background-color: navy; color: wheat">
+      <h4>STUDENT</h4>
+    </div>
+    <% } %>
+
     <h6><%= user.email %></h6>
   </body>
 </html>

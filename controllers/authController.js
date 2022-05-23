@@ -6,10 +6,7 @@ const createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
 
-    res.status(201).json({
-      status: "user created",
-      user,
-    });
+    res.status(201).redirect("/login");
   } catch (error) {
     res.status(404).json({
       status: "fail",
@@ -28,7 +25,7 @@ const loginUser = async (req, res) => {
         if (same) {
           /* there's no such thing as userID, but there's an object that is 'session'. So, I added userID variable to that object and assigned user's _id to it */
           req.session.userID = user._id;
-          res.status(200).redirect("/");
+          res.status(200).redirect("/users/my-learning");
         } else {
           res
             .status(400)
