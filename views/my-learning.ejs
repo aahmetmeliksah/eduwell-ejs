@@ -1,26 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body style="font-family: sans-serif">
-    <h1><%= user.name %></h1>
+<%- include('partials/_header.ejs') %>
+<!--  -->
+<%- include('partials/_navigation.ejs') %>
+<h1><%= user.name %></h1>
 
-    <% if(user.role === "teacher") { %>
-    <div style="background-color: navy; color: wheat">
-      <h4>TEACHER</h4>
-    </div>
-    <% } %>
-    <!--  -->
-    <% if(user.role === "student") { %>
-    <div style="background-color: navy; color: wheat">
-      <h4>STUDENT</h4>
-    </div>
-    <% } %>
+<% if(user.role === "teacher") { %>
+<div
+  style="
+    background-color: navy;
+    color: wheat;
+    margin-top: 5rem;
+    margin-left: 0.5rem;
+    width: 10%;
+    border-radius: 15px;
+  "
+>
+  <h4 style="margin-left: 2rem"><%= user.name %></h4>
+</div>
 
-    <h6><%= user.email %></h6>
-  </body>
-</html>
+<!-- add course form -->
+<form action="/courses" method="POST" class="row" style="margin-top: 1rem">
+  <div class="form-group">
+    <div class="col-sm-12">
+      <input type="text" name="name" placeholder="Course Name" />
+    </div>
+  </div>
+  <input type="hidden" name="role" value="<%= user.role %>" />
+  <div class="form-group">
+    <div class="col-sm-12">
+      <textarea
+        rows="8"
+        name="description"
+        class="form-control"
+        placeholder="Course Description"
+        required
+      ></textarea>
+    </div>
+  </div>
+
+  <select name="category">
+    <% for(let i = 0; i < categories.length; i++) { %>
+    <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
+    <% } %>
+  </select>
+
+  <div class="form-group">
+    <div class="col-sm-12">
+      <button type="submit">Submit</button>
+    </div>
+  </div>
+</form>
+<!-- add course form end -->
+<!-- COURSES start -->
+<% for(let i = 0; i < courses.length; i++) { %>
+<div class="col-sm-6 border mb-4">
+  <div class="text-center" style="width: 100%">
+    <img
+      src="assets/images/courses-01.jpg"
+      class="img-fluid rounded"
+      alt=""
+      style="max-height: 15rem; max-width: 25rem"
+    />
+  </div>
+  <div class="text-center">
+    <a href="/courses/<%= courses[i].slug %>"
+      ><h4><%= courses[i].name %></h4></a
+    >
+    <p><%= courses[i].description %></p>
+    <h6>$128</h6>
+    <span>36 Hours</span>
+    <span>4 Weeks</span>
+    <span>3 Certificates</span>
+  </div>
+</div>
+<% } %>
+<!-- COURSES end -->
+<% } %>
+<!--  -->
+<!-- STUDENTS -->
+<% if(user.role === "student") { %>
+<div style="background-color: navy; color: wheat">
+  <h4>STUDENT</h4>
+</div>
+<% } %>
+
+<h6><%= user.email %></h6>

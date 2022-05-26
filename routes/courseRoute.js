@@ -11,7 +11,7 @@ const {
 // middlewares
 const roleMiddleware = require("../middlewares/roleMiddleware");
 
-router.route("/").post(roleMiddleware(["admin", "student"]), addCourse); // add course
+router.route("/").post(roleMiddleware(["admin", "teacher"]), addCourse); // add course
 router.route("/").get(getAllCourses); // get all courses
 router.route("/:slug").get(getCourse); // get a course
 

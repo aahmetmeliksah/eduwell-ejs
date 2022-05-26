@@ -4,12 +4,14 @@ const Category = require("../models/Category");
 // add a course
 const addCourse = async (req, res) => {
   try {
-    const course = await Course.create(req.body);
-
-    res.status(201).json({
-      status: "course created",
-      course,
+    const course = await Course.create({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      user: req.session.userID,
     });
+
+    res.status(201).redirect("/courses");
   } catch (error) {
     res.status(400).json({
       status: "Fail",
@@ -29,7 +31,7 @@ const getAllCourses = async (req, res) => {
       filter = { category: category._id };
     }
 
-    const courses = await Course.find(filter);
+    const courses = await Course.find(filter).sort("-createdAt");
     const categories = await Category.find();
 
     res.status(200).render("courses", {
